@@ -8,6 +8,7 @@ from .project_item import ProjectItem
 from .schedule_item import ScheduleItem
 from .site_item import SiteItem
 from .tableau_auth import TableauAuth
+from .task_item import TaskItem
 from .user_item import UserItem
 from .view_item import ViewItem
 from .workbook_item import WorkbookItem

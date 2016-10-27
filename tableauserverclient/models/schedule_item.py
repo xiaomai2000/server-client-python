@@ -3,6 +3,7 @@ from datetime import datetime
 
 from .interval_item import IntervalItem, HourlyInterval, DailyInterval, WeeklyInterval, MonthlyInterval
 from .property_decorators import property_is_enum, property_not_nullable, property_is_int
+from .exceptions import UnpopulatedPropertyError
 from .. import NAMESPACE
 
 
@@ -31,6 +32,7 @@ class ScheduleItem(object):
         self.name = name
         self.priority = priority
         self.schedule_type = schedule_type
+        self._tasks = None
 
     @property
     def created_at(self):
@@ -97,6 +99,13 @@ class ScheduleItem(object):
     @property
     def updated_at(self):
         return self._updated_at
+
+    @property
+    def tasks(self):
+        if self._tasks is None:
+            error = "Schedule item must be populated with its tasks first."
+            raise UnpopulatedPropertyError(error)
+        return self._tasks
 
     def _parse_common_tags(self, schedule_xml):
         if not isinstance(schedule_xml, ET.Element):

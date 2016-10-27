@@ -1,6 +1,6 @@
 from .endpoint import Endpoint
 from .exceptions import MissingRequiredFieldError
-from .. import RequestFactory, PaginationItem, ScheduleItem
+from .. import RequestFactory, PaginationItem, ScheduleItem, TaskItem
 import logging
 import copy
 
@@ -47,6 +47,16 @@ class Schedules(Endpoint):
         updated_schedule = copy.copy(schedule_item)
         return updated_schedule._parse_common_tags(server_response.content)
 
+    def populate_tasks(self, schedule_item, req_options):
+        if not schedule_item.id:
+            error = "Schedule item missing ID."
+            raise MissingRequiredFieldError(error)
+        url = "{0}/{1}/extracts".format(self.baseurl, schedule_item.id)
+        server_response = self.get_request(url, req_options)
+        # Adding to an existing list ... how to handle paging and knowing what paging might already have been done
+        pagination_item = PaginationItem.from_response(server_response.content)
+        schedule_item.tasks = TaskItem.from_response(server_response.content)
+        
     def create(self, schedule_item):
         if schedule_item.interval_item is None:
             error = "Interval item must be defined."
