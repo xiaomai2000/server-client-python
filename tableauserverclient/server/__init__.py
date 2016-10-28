@@ -2,10 +2,10 @@ from .request_factory import RequestFactory
 from .request_options import RequestOptions
 from .filter import Filter
 from .sort import Sort
-from .. import ConnectionItem, DatasourceItem,\
+from .. import ConnectionItem, DatasourceItem, ExtractRefreshTaskItem,\
     GroupItem, PaginationItem, ProjectItem, ScheduleItem, SiteItem, TableauAuth,\
-    TaskItem, UserItem, ViewItem, WorkbookItem, NAMESPACE
+    UserItem, ViewItem, WorkbookItem, NAMESPACE
 from .endpoint import Auth, Datasources, Endpoint, Groups, Projects, Schedules, \
-    Sites, Users, Views, Workbooks, ServerResponseError, MissingRequiredFieldError
+    Sites, Tasks, Users, Views, Workbooks, ServerResponseError, MissingRequiredFieldError
 from .server import Server
 from .exceptions import NotSignedInError
