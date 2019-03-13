@@ -1,19 +1,19 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<tsResponse xmlns="http://tableau.com/api" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tableau.com/api http://tableau.com/api/ts-api-2.3.xsd">
-    <pagination pageNumber="1" pageSize="100" totalAvailable="2" />
+<tsResponse xmlns="http://tableau.com/api" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://tableau.com/api http://tableau.com/api/ts-api-3.4.xsd">
+    <pagination pageNumber="1" pageSize="100" totalAvailable="2"/>
     <datasources>
-        <datasource id="e76a1461-3b1d-4588-bf1b-17551a879ad9" name="SampleDS" contentUrl="SampleDS" type="dataengine" createdAt="2016-08-11T21:22:40Z" updatedAt="2016-08-11T21:34:17Z">
-            <project id="ee8c6e70-43b6-11e6-af4f-f7b0d8e20760" name="default" />
-            <owner id="5de011f8-5aa9-4d5b-b991-f462c8dd6bb7" />
-            <tags />
+        <datasource id="0d826bf5-7740-4a1f-a9d4-bc9f593907c2" name="Sheet1 (Tab)" contentUrl="Sheet1Tab" webpageUrl="http://test/#/datasources/14" description="ds1" type="google-sheets" createdAt="2019-03-12T20:46:05Z" updatedAt="2019-03-12T21:29:09Z" isCertified="false" serverName="server" databaseName="Tab" hasExtracts="true" hasAlert="false" size="1" isPublished="true" connectedWorkbooksCount="0" favoritesTotal="0" encryptExtracts="false" useRemoteQueryAgent="false">
+            <project id="bdd975c6-4042-11e9-a712-975dc31937aa" name="Default" description="The default project that was automatically created by Tableau."/>
+            <owner id="344356bd-a847-4d6c-8370-8b2821498cdb" name="testadmin" fullName="testadmin" siteRole="ServerAdministrator" lastLogin="2019-03-13T16:37:57Z"/>
+            <tags/>
         </datasource>
-        <datasource id="9dbd2263-16b5-46e1-9c43-a76bb8ab65fb" name="Sample datasource" contentUrl="Sampledatasource" type="dataengine" createdAt="2016-08-04T21:31:55Z" updatedAt="2016-08-04T21:31:55Z">
-            <project id="ee8c6e70-43b6-11e6-af4f-f7b0d8e20760" name="default" />
-            <owner id="5de011f8-5aa9-4d5b-b991-f462c8dd6bb7" />
+        <datasource id="f8832e2d-a002-491e-91bd-3302f32ab279" name="dataengine.42019" contentUrl="dataengine_42019" webpageUrl="http://test/#/datasources/15" description="datasource2" type="hyper" createdAt="2019-03-12T22:06:26Z" updatedAt="2019-03-13T16:39:10Z" isCertified="true" databaseName="databasename.tmp" hasExtracts="false" hasAlert="false" size="3" isPublished="true" connectedWorkbooksCount="1" favoritesTotal="9" encryptExtracts="false" useRemoteQueryAgent="false">
+            <project id="bdd975c6-4042-11e9-a712-975dc31937aa" name="Default" description="The default project that was automatically created by Tableau."/>
+            <owner id="344356bd-a847-4d6c-8370-8b2821498cdb" name="testadmin" fullName="testadmin" siteRole="ServerAdministrator" lastLogin="2019-03-13T16:37:57Z"/>
             <tags>
-                <tag label="world" />
-                <tag label="indicators" />
-                <tag label="sample" />
+                <tag label="a"/>
+                <tag label="b"/>
+                <tag label="c"/>
             </tags>
         </datasource>
     </datasources>

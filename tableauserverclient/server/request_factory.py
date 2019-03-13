@@ -88,7 +88,8 @@ class DatasourceRequest(object):
             owner_element = ET.SubElement(datasource_element, 'owner')
             owner_element.attrib['id'] = datasource_item.owner_id
 
-        datasource_element.attrib['isCertified'] = str(datasource_item.certified).lower()
+        if datasource_item.certified is not None:
+            datasource_element.attrib['isCertified'] = str(datasource_item.certified).lower()
 
         if datasource_item.certification_note:
             datasource_element.attrib['certificationNote'] = str(datasource_item.certification_note)

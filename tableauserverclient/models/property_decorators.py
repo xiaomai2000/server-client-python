@@ -136,3 +136,14 @@ def property_is_datetime(func):
         dt = parse_datetime(value)
         return func(self, dt)
     return wrapper
+
+
+def property_is_set(func):
+    @wraps(func)
+    def wrapper(self, value):
+        if not isinstance(value, set):
+            error = "Set expected for {0} flag.".format(func.__name__)
+            raise ValueError(error)
+        return func(self, value)
+
+    return wrapper

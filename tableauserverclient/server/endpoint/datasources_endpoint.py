@@ -4,7 +4,6 @@ from .fileuploads_endpoint import Fileuploads
 from .resource_tagger import _ResourceTagger
 from .. import RequestFactory, DatasourceItem, PaginationItem, ConnectionItem
 from ...filesys_helpers import to_filename
-from ...models.tag_item import TagItem
 from ...models.job_item import JobItem
 import os
 import logging
@@ -33,7 +32,7 @@ class Datasources(Endpoint):
     @api(version="2.0")
     def get(self, req_options=None):
         logger.info('Querying all datasources on site')
-        url = self.baseurl
+        url = self.baseurl + "?fields=_all_"
         server_response = self.get_request(url, req_options)
         pagination_item = PaginationItem.from_response(server_response.content, self.parent_srv.namespace)
         all_datasource_items = DatasourceItem.from_response(server_response.content, self.parent_srv.namespace)
@@ -60,7 +59,7 @@ class Datasources(Endpoint):
         def connections_fetcher():
             return self._get_datasource_connections(datasource_item)
 
-        datasource_item._set_connections(connections_fetcher)
+        datasource_item._connections = connections_fetcher
         logger.info('Populated connections for datasource (ID: {0})'.format(datasource_item.id))
 
     def _get_datasource_connections(self, datasource_item, req_options=None):
@@ -127,7 +126,7 @@ class Datasources(Endpoint):
         server_response = self.put_request(url, update_req)
         logger.info('Updated datasource item (ID: {0})'.format(datasource_item.id))
         updated_datasource = copy.copy(datasource_item)
-        return updated_datasource._parse_common_elements(server_response.content, self.parent_srv.namespace)
+        return updated_datasource._parse_updated_elements(server_response.content, self.parent_srv.namespace)
 
     # Update datasource connections
     @api(version="2.3")
@@ -142,6 +141,7 @@ class Datasources(Endpoint):
                                                                                     connection_item.id))
         return connection
 
+    @api(version="2.8")
     def refresh(self, datasource_item):
         url = "{0}/{1}/refresh".format(self.baseurl, datasource_item.id)
         empty_req = RequestFactory.Empty.empty_req()
