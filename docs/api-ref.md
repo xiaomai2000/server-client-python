@@ -3425,7 +3425,7 @@ Queries the server and returns information about the workbooks the site.
 
 
 
-REST API: [Query Workbooks for Site](http://onlinehelp.tableau.com/current/api/rest_api/en-us/help.htm#REST/rest_api_ref.htm#Query_Workbooks_for_Site%3FTocPath%3DAPI%2520Reference%7C_____70){:target="_blank"}  
+REST API: [Query Workbooks for Site](https://onlinehelp.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref.htm#query_workbooks_for_site){:target="_blank"}  
 
 
 **Parameters**
@@ -3470,7 +3470,7 @@ workbooks.get_by_id(workbook_id)
 
 Returns information about the specified workbook on the site.
 
-REST API: [Query Workbook](http://onlinehelp.tableau.com/current/api/rest_api/en-us/help.htm#REST/rest_api_ref.htm#Query_Workbook%3FTocPath%3DAPI%2520Reference%7C_____66){:target="_blank"}  
+REST API: [Query Workbook](https://onlinehelp.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref.htm#query_workbook){:target="_blank"}  
 
 
 **Parameters**
@@ -3521,7 +3521,7 @@ unless you package the data and workbook in a .twbx file, or publish the data so
 
 For workbooks that are larger than 64 MB, the publish method automatically takes care of chunking the file in parts for uploading. Using this method is considerably more convenient than calling the publish REST APIs directly.  
 
-REST API: [Publish Workbook](http://onlinehelp.tableau.com/current/api/rest_api/en-us/help.htm#REST/rest_api_ref.htm#Publish_Workbook%3FTocPath%3DAPI%2520Reference%7C_____45){:target="_blank"}, [Initiate File Upload](http://onlinehelp.tableau.com/current/api/rest_api/en-us/help.htm#REST/rest_api_ref.htm#Initiate_File_Upload%3FTocPath%3DAPI%2520Reference%7C_____43){:target="_blank"}, [Append to File Upload](http://onlinehelp.tableau.com/current/api/rest_api/en-us/help.htm#REST/rest_api_ref.htm#Append_to_File_Upload%3FTocPath%3DAPI%2520Reference%7C_____13){:target="_blank"}    
+REST API: [Publish Workbook](https://onlinehelp.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref.htm#publish_workbook){:target="_blank"}, [Initiate File Upload](https://onlinehelp.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref.htm#initiate_file_upload){:target="_blank"}, [Append to File Upload](https://onlinehelp.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref.htm#append_to_file_upload){:target="_blank"}    
 
 
 
@@ -3545,7 +3545,7 @@ Error | Description
 `Workbooks cannot be appended.` | The `mode` must be set to `Overwrite` or `CreateNew`.  
 `Only .twb or twbx files can be published as workbooks.`  |  Raises an error if the type of file specified is not supported. 
 
-See the REST API [Publish Workbook](http://onlinehelp.tableau.com/current/api/rest_api/en-us/help.htm#REST/rest_api_ref.htm#Publish_Workbook%3FTocPath%3DAPI%2520Reference%7C_____45){:target="_blank"} for additional error codes. 
+See the REST API [Publish Workbook](https://onlinehelp.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref.htm#publish_workbook){:target="_blank"} for additional error codes. 
 
 **Returns**
 
@@ -3578,36 +3578,33 @@ workbooks.update(workbook_item)
 ```
 
 
-Modifies an existing workbook. Use this method to change the owner or the project that the workbook belongs to, or to change whether the workbook shows views in tabs. The workbook item must include the workbook ID and overrides the existing settings.
+Modifies an existing workbook. Use this method to change the name of the workbook, change whether the workbook shows its views in tabs, or change the owner or the project that the workbook belongs to. This method requires a workbook item, and returns a new workbook item that represents the modified workbook.
 
-REST API: [Update Workbooks](http://onlinehelp.tableau.com/current/api/rest_api/en-us/help.htm#REST/rest_api_ref.htm#Update_Workbook%3FTocPath%3DAPI%2520Reference%7C_____87){:target="_blank"}
+REST API: [Update Workbooks](https://onlinehelp.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref.htm#update_workbook){:target="_blank"}
 
 **Parameters**
 
 Name | Description  
 :--- | :--- 
-`workbook_item`  |  The `workbook_item` specifies the settings for the workbook you are updating. You can change the `owner_id`, `project_id`, and the `show_tabs` values. See [WorkbookItem](#workbookitem-class).
+`workbook_item`  |  The `workbook_item` specifies the settings for the workbook you are updating. You can change the `owner_id`, `project_id`, `name`, and the `show_tabs` values. See [WorkbookItem](#workbookitem-class).
 
 
 **Exceptions**
 
-Error | Description  
-:--- | :--- 
-`Workbook item missing ID. Workbook must be retrieved from server first.` | Raises an error if the `workbook_item` is unspecified. Use the `workbooks.get()` or `workbooks.get_by_id()` methods to retrieve the workbook item from the server. 
+Error | Description
+:--- | :---
+`Workbook item missing ID. Workbook must be retrieved from server first.` | Raises an error if the ID of the workbook is missing.
 
 
 ```py  
-
 import tableauserverclient as TSC
 tableau_auth = TSC.TableauAuth('username', 'password', site_id='site')
 server = TSC.Server('http://servername')
 
 with server.auth.sign_in(tableau_auth):
-
     # get the workbook item from the site
     workbook = server.workbooks.get_by_id('1a1b1c1d-2e2f-2a2b-3c3d-3e3f4a4b4c4d')
     print("\nUpdate {0} workbook. Project was {1}".format(workbook.name, workbook.project_name))
-
 
     # make an change, for example a new project ID
     workbook.project_id = '1f2f3e4e-5d6d-7c8c-9b0b-1a2a3f4f5e6e'
@@ -3615,8 +3612,6 @@ with server.auth.sign_in(tableau_auth):
     # call the update method
     workbook = server.workbooks.update(workbook)
     print("\nUpdated {0} workbook. Project is now {1}".format(workbook.name, workbook.project_name))
-
-
 ```
 
 
@@ -3638,7 +3633,7 @@ Deletes a workbook with the specified ID.
 To specify the site, create a `TableauAuth` instance using the content URL for the site (`site_id`), and sign in to that site.  See the [TableauAuth class](#tableauauth-class).  
 
 
-REST API: [Delete Workbook](http://onlinehelp.tableau.com/current/api/rest_api/en-us/help.htm#REST/rest_api_ref.htm#Delete_Workbook%3FTocPath%3DAPI%2520Reference%7C_____31){:target="_blank"}  
+REST API: [Delete Workbook](https://onlinehelp.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref.htm#delete_workbook){:target="_blank"}  
 
 
 **Parameters**
@@ -3682,7 +3677,7 @@ workbooks.download(workbook_id, filepath=None, no_extract=False)
 Downloads a workbook to the specified directory (optional).
 
 
-REST API: [Download Workbook](http://onlinehelp.tableau.com/current/api/rest_api/en-us/help.htm#REST/rest_api_ref.htm#Download_Workbook%3FTocPath%3DAPI%2520Reference%7C_____36){:target="_blank"}  
+REST API: [Download Workbook](https://onlinehelp.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref.htm#download_workbook){:target="_blank"}  
 
 
 **Parameters**
@@ -3733,7 +3728,7 @@ You must first call this method to populate views before you can iterate through
 
 This method retrieves the view information for the specified workbook. The REST API is designed to return only the information you ask for explicitly. When you query for all the data sources, the view information is not included. Use this method to retrieve the views. The method adds the list of views to the workbook item (`workbook_item.views`). This is a list of `ViewItem`.  
 
-REST API:  [Query Views for Workbook](http://onlinehelp.tableau.com/current/api/rest_api/en-us/help.htm#REST/rest_api_ref.htm#Query_Views_for_Workbook%3FTocPath%3DAPI%2520Reference%7C_____65){:target="_blank"}
+REST API:  [Query Views for Workbook](https://onlinehelp.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref.htm#query_views_for_workbook){:target="_blank"}
 
 **Parameters**
 
@@ -3796,7 +3791,7 @@ connections.
 
 This method retrieves the data source connection information for the specified workbook. The REST API is designed to return only the information you ask for explicitly. When you query all the workbooks, the data source connection information is not included. Use this method to retrieve the connection information for any data sources used by the workbook. The method adds the list of data connections to the workbook item (`workbook_item.connections`). This is a list of `ConnectionItem`.  
 
-REST API:  [Query Workbook Connections](http://onlinehelp.tableau.com/current/api/rest_api/en-us/help.htm#REST/rest_api_ref.htm#Query_Workbook_Connections%3FTocPath%3DAPI%2520Reference%7C_____67){:target="_blank"}  
+REST API:  [Query Workbook Connections](https://onlinehelp.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref.htm#query_workbook_connections){:target="_blank"}  
 
 **Parameters**
 
@@ -3858,7 +3853,7 @@ This method gets the preview image (thumbnail) for the specified workbook item.
 
 The method uses the `view.id` and `workbook.id` to identify the preview image. The method populates the `workbook_item.preview_image`. 
 
-REST API: [Query View Preview Image](http://onlinehelp.tableau.com/current/api/rest_api/en-us/help.htm#REST/rest_api_ref.htm#Query_Workbook_Preview_Image%3FTocPath%3DAPI%2520Reference%7C_____69){:target="_blank"}
+REST API: [Query View Preview Image](https://onlinehelp.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref.htm#query_workbook_preview_image){:target="_blank"}
 
 **Parameters** 
 
@@ -3911,7 +3906,7 @@ Updates a workbook connection information (server address, server port, user nam
 
 The workbook connections must be populated before the strings can be updated. See [workbooks.populate_connections](#workbooks.populate_connections)
 
-REST API:  [Update Workbook Connection](http://onlinehelp.tableau.com/current/api/rest_api/en-us/help.htm#REST/rest_api_ref.htm#Update_Workbook_Connection%3FTocPath%3DAPI%2520Reference%7C_____88){:target="_blank"}  
+REST API:  [Update Workbook Connection](https://onlinehelp.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref.htm#update_workbook_connection){:target="_blank"}  
 
 **Parameters**
 
