@@ -3580,7 +3580,7 @@ workbooks.update(workbook_item)
 
 Modifies an existing workbook. Use this method to change the name of the workbook, change whether the workbook shows its views in tabs, or change the owner or the project that the workbook belongs to. This method requires a workbook item, and returns a new workbook item that represents the modified workbook.
 
-REST API: [Update Workbooks](https://onlinehelp.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref.htm#update_workbook){:target="_blank"}
+REST API: [Update Workbook](https://onlinehelp.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref.htm#update_workbook){:target="_blank"}
 
 **Parameters**
 
