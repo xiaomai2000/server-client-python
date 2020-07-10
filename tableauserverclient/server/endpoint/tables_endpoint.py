@@ -1,9 +1,10 @@
 from .endpoint import api, Endpoint
 from .exceptions import MissingRequiredFieldError
 from .permissions_endpoint import _PermissionsEndpoint
+from .default_permissions_endpoint import _DefaultPermissionsEndpoint
 from ..pager import Pager
 
-from .. import RequestFactory, TableItem, ColumnItem, PaginationItem
+from .. import RequestFactory, TableItem, ColumnItem, PaginationItem, PermissionsRule, Permission
 
 import logging
 

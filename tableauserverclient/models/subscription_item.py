@@ -1,4 +1,5 @@
 import xml.etree.ElementTree as ET
+from .exceptions import UnpopulatedPropertyError
 from .target import Target
 
 

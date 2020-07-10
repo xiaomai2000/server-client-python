@@ -1,6 +1,7 @@
 from functools import partial
 
 from . import RequestOptions
+from . import Sort
 
 
 class Pager(object):

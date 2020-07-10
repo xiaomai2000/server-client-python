@@ -1,5 +1,7 @@
 import xml.etree.ElementTree as ET
 from ..datetime_helpers import parse_datetime
+from .target import Target
+from ..datetime_helpers import parse_datetime
 
 
 class JobItem(object):
